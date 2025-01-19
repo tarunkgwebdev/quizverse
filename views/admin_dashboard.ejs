@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizVerse</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .b1 {
+            background-color: white;
+            color: #007bff;
+            transition: 0.27s;
+        }
+        .b1:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        button {
+            width: 100%;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container1">
+        <div class="container2">
+            <h1>WELCOME, <%= adminName %> !</h1>
+            <form method="post" action="/manage-questions">
+                <button type="submit">MANAGE</button>        
+            </form>
+            <form method="post" action="/redirectit">
+                <button class="b1" type="submit">ATTEMPT QUIZ</button>        
+            </form>
+        </div>
+    </div>
+</body>
+</html>

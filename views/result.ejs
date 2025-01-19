@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizVerse</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container1">
+        <div class="container2">
+            <% const feedbacks = [
+            "Don't worry, you'll do better next time!", 
+            "Keep practicing, you’re making progress!", 
+            "Good effort! Focus on improving further.", 
+            "You're getting there! Keep going!",        
+            "Decent score! A little more practice and you'll ace it.", 
+            "Nice job! You're above average!",         
+            "Well done! You're performing really well!", 
+            "Great work! You're close to mastering it!", 
+            "Amazing! You're at the top of your game!", 
+            "Perfect score! Outstanding performance!"   
+        ]; %>
+            <% let percentage = (score / total) * 100; %>
+            <% let feedbackIndex = Math.min(Math.floor(percentage / 10), 9); %>
+            <% let feedback = feedbacks[feedbackIndex]; %>
+            <% console.log(percentage); %>
+            <h1 style="color: <%= percentage >= 80 ? '#228b22' : percentage >= 50 ? '#ffa500' : '#ff4500' %>;">
+                <%= feedback %>
+            </h1>
+            
+            <!--<h1 style="color: #228b22;"><%= feedback %></h1>-->
+            <h2>Your Score: <%= score %> / <%= total %></h2>
+            <p>Wanna play again? <a href="/">Click here! </a></p>
+        </div>
+    </div>
+</body>
+</html>

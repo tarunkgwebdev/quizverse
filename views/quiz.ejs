@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizVerse</title>
+    <!--<link rel="stylesheet" href="styles.css">-->
+    <style>
+        h1{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .container1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .container3 {
+            background-color: whitesmoke;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            padding: 80px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 700px;
+            height: auto;
+        }
+        p, h2, h3, label {
+            font-family: Arial, Helvetica, sans-serif;
+        }   
+        input[type="email"], input[type="password"], input[type="text"], button {
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            padding: 10px;
+            border: 1px solid #ffffff;
+            margin: 10px 0px;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 12px 0px;
+            border-radius: 21px;
+            transition: 0.27s;
+        }
+
+    </style>
+    
+</head>
+<body onload="startTimer(<%= quizNoq * parseInt(quizTimer) %>)">
+    <div class="container1">
+        <h1>QuizVerse</h1>
+        <div class="container3">
+            <h1 style="color: #007bff;">QNA!</h1>
+            <h3 id="timer">Time Left: Loading...</h3>
+            <form id="quizForm" method="POST" action="/quiz/result">
+                <% quizQuestions.forEach((question, index) => { %>
+                        <p><%= index + 1 %>. <%= question.question %></p>
+                        <div class="options">
+                            <label>
+                                <input type="radio" name="answer_<%= index %>" value="1"> <%= question.option1 %>
+                            </label>
+                            <label>
+                                <input type="radio" name="answer_<%= index %>" value="2"> <%= question.option2 %>
+                            </label>
+                            <label>
+                                <input type="radio" name="answer_<%= index %>" value="3"> <%= question.option3 %>
+                            </label>
+                            <label>
+                                <input type="radio" name="answer_<%= index %>" value="4"> <%= question.option4 %>
+                            </label>
+                            <br>
+                        </div><br>      
+                <% }); %>
+                <button type="submit">Submit Quiz</button>
+            </form>
+        </div>
+    </div>
+    <script>
+
+        function startTimer(totalTime) {
+            const timerDisplay = document.getElementById('timer');
+            const quizForm = document.getElementById('quizForm');
+            
+            let timeLeft = totalTime;
+            const interval = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+
+                timerDisplay.textContent = `Time Left: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    alert('Time is up! Submitting the quiz...');
+                    quizForm.submit(); // Submit the form automatically
+                }
+
+                timeLeft--;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
